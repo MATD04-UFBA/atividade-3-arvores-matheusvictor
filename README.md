@@ -36,7 +36,7 @@ Um programa base será fornecido pelo professor, que trata da apresentação da 
 - A representação da imagem a partir de um certo nível da quadtree completa. O nível pode ser ampliado ou reduzido de forma iterativa (Figura 2);
 - A representação da imagem comprimida para um determinado valor de erro percentual. O valor do erro deve ser incrementado ou decrementado em intervalos de 5%.
 
-![Figura 2 - Imagem de níveis distintos da quadtree completa.](images/Quadtree.png) 
+![Figura 2 - Imagem de níveis distintos da quadtree completa.](images/Quadtree-Nivel.png) 
 
 ## A Implementação:
 
@@ -70,7 +70,8 @@ Seu programa será avaliado pelos critérios:
 
 > Será aplicada a penalização de -1,0 pto por dia de atraso (verificado via data da ultima submissão no repositório)
 > A cooperação entre alunos é considerada salutar. No entanto, trabalhos com alto grau de similaridade serão tratados como “plágio”.
->> **Em casos de plágio (total ou parcial) todos os envolvidos terão suas avaliações zeradas**. 
+> 
+> **Em casos de plágio (total ou parcial) todos os envolvidos terão suas avaliações zeradas**. 
 
 Qualquer dúvida adicional, evite problemas: não presuma nada, procure o professor para esclarecimentos.
 
@@ -96,3 +97,59 @@ Qualquer dúvida adicional, evite problemas: não presuma nada, procure o profes
 
 [10] 	Isabel Harb Manssour, "Introdução à OpenGL", https://www.inf.pucrs.br/~manssour/OpenGL/PrimeiroPrograma.html
 
+
+# **Compressão**
+
+### **Por que compactar:**
+
+- Otimização de espaço ==> Busca certificar-se de que os dados sejam armazenados da maneira mais econômica possível.
+
+### **O que pode ser compactado:**
+
+- Textos, imagens, áudios ou informações com redundância.
+
+    - Exemplo: 
+        - Em textos podemos considerar como redundantes as letras que se repetem (algumas com mais frequência que outras);
+        - Já nas imagens, podem ser consideradas a predominância das cores por região;
+        - Em áudios podem ser consideradas as ausência de som em determinados trechos ou ainda frequências próximas de tons.
+
+- Algoritmos de compressão buscam lidar com essa redundância. 
+
+### **Tipos de compressão:**
+
+- **Com perdas:** aumenta a redundância e, portanto, tende a aumentar a taxa de compressão. Como no processo de compressão algumas das informações originais são perdidas, a descompressão não resulta na mesmas informações originais, porém, o ideal é que essa perda seja mínima a finm de que a percepção do usuário sobre a informação não mude. 
+
+    No caso da compressão de imagens, por exemplo, pixels de cores muito parecidas podem ser transformados em uma única cor (a mais predominante) que represente o tom que mais se aproxima da informação original.
+    
+    Em áudios podem haver perdas de trechos fora da zona audível ou que possuam frequência de tom muito próximas.
+
+    - **Principal desvantagem:** Como dito anteriormente, a perda de dados nesse processo faz com que a descompressão não resulte no conjunto de informações exatamente igual ao original.    
+
+- **Sem perdas:** Ao contário do tipo acima, nesse caso o processo de descompressão resulta ... com a mesma precisão de informações que o dado original. Um dos algoritmos mais conhecidos é a Codificação de Huffman
+
+
+# Árvores
+
+### Árvores Binárias (AB)
+
+Uma Árvore Binária (AB) consiste em um 
+
+```
+conjunto finito de nós que está vaio ou consiste em um nó chamado raiz mais os elementos de duas árvores distintas chamadas de subárvores esquerda e direita do nó raiz 
+```
+
+(ZIVIANE,  ANO, p. 158 _apud_ KNUTH, 1997).
+
+### Quadtree
+
+# **Materiais consultados:**
+
+### Configuração de ambiente (Windows):
+
+- [6], [7], [8], [9], [10]
+
+### Estruturas de dados, algoritmos & outros:
+
+- ZIVIANI, Nivio. Projeto de Algoritmos: com Implementações em Pascal e C. Vol. 2. Thomson, 2004, p. 158.
+- [Codificação de Huffman](https://www.youtube.com/watch?v=xQQt5myz00o)
+- [Como a compressão de dados funciona? (Árvore de Huffman)](https://www.youtube.com/watch?v=-TonlL3vcGk)
