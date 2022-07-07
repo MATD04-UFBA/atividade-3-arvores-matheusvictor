@@ -93,9 +93,9 @@ Qualquer dúvida adicional, evite problemas: não presuma nada, procure o profes
 
 [8]	Nícolas Roque dos Santos, Guia de instalação - OpenGL, GLUT e GLEW. disponível em: https://edisciplinas.usp.br/pluginfile.php/4264396/mod_resource/content/1/guia-de-instalacao.pdf
 
-[9] 	Freeglut Windows Development, disponível em: https://www.transmissionzero.co.uk/software/freeglut-devel/
+[9] Freeglut Windows Development, disponível em: https://www.transmissionzero.co.uk/software/freeglut-devel/
 
-[10] 	Isabel Harb Manssour, "Introdução à OpenGL", https://www.inf.pucrs.br/~manssour/OpenGL/PrimeiroPrograma.html
+[10] Isabel Harb Manssour, "Introdução à OpenGL", https://www.inf.pucrs.br/~manssour/OpenGL/PrimeiroPrograma.html
 
 
 # **Compressão**
@@ -123,24 +123,41 @@ Qualquer dúvida adicional, evite problemas: não presuma nada, procure o profes
     
     Em áudios podem haver perdas de trechos fora da zona audível ou que possuam frequência de tom muito próximas.
 
-    - **Principal desvantagem:** Como dito anteriormente, a perda de dados nesse processo faz com que a descompressão não resulte no conjunto de informações exatamente igual ao original.    
+    - **Algumas desvantagens:**
+        - Como dito anteriormente, a perda de dados nesse processo faz com que a descompressão não resulte no conjunto de informações exatamente igual ao original;
 
-- **Sem perdas:** Ao contário do tipo acima, nesse caso o processo de descompressão resulta ... com a mesma precisão de informações que o dado original. Um dos algoritmos mais conhecidos é a Codificação de Huffman
+        - Se a imagem tiver muitas cores diferentes, a árvore pode ficar tão complexa que a imagem compactada ficará maior que a original
+
+- **Sem perdas:** Ao contário do tipo acima, nesse caso o processo de descompressão resulta a informação comprimida com a mesma precisão da que foi dada originalment. Um dos algoritmos mais conhecidos para esse tipo de compressão é a Codificação de Huffman.
 
 
-# Árvores
+# **Árvores:**
 
-### Árvores Binárias (AB)
+### **Árvores Binárias (AB):**
 
-Uma Árvore Binária (AB) consiste em um 
+De acordo com Zivian (2004, p. 158 _apud_ KNUTH, 1997), uma Árvore Binária (AB) consiste em um 
 
 ```
-conjunto finito de nós que está vaio ou consiste em um nó chamado raiz mais os elementos de duas árvores distintas chamadas de subárvores esquerda e direita do nó raiz 
+"conjunto finito de nós que está vazio ou consiste em um nó chamado raiz mais os elementos de duas árvores distintas chamadas de subárvores esquerda e direita do nó raiz."
 ```
 
-(ZIVIANE,  ANO, p. 158 _apud_ KNUTH, 1997).
+Assim, no caso de um AB, cada nó tem no máximo duas outras subárvores.
 
-### Quadtree
+
+### **Quadtree (ou Árvore Quadrantes):**
+
+A definição acima aplica-se quase que inteiramente à uma Quadtree, com a diferença de que cada um dos seus nós têm quadro filhos, ao invés de apena dois como na AB.
+
+Quadtrees "são comummente utilizadas para participar espaços com duas dimensões, subdividindo o espaço recursivamente em quatro quadrantes ou regiões. O dato associado com a folha pode variar de acordo com a aplicação, mas a folha representa uma _"unidade de informação espacial interessante"_" (tradução livre feita a partir do Wikipédia*)
+
+``` 
+* citação original:
+most often used to partition a two-dimensional space by recursively subdividing it into four quadrants or regions. The data associated with a leaf cell varies by application, but the leaf cell represents a "unit of interesting spatial information"
+```
+
+Em outras palavras, a ideia de uma Quadtree é dividir o espaço em regiões (ou quadrantes) até que cada uma dessas regiões quase uma informação espacial relevante. No caso do problema em questão, estamos interessados em cada pixel individualmente.
+
+Existem alguns tipos de Quadtree, tais como _Region Quadtree_, _Point QuadTree_, _PointRegion-Quadtree_, e outros. O problema proposto pode ser resolvido com uma **Region Quadtree** (ou, em tradução livre, Árvore Quadrante por Região).
 
 # **Materiais consultados:**
 
@@ -151,5 +168,17 @@ conjunto finito de nós que está vaio ou consiste em um nó chamado raiz mais o
 ### Estruturas de dados, algoritmos & outros:
 
 - ZIVIANI, Nivio. Projeto de Algoritmos: com Implementações em Pascal e C. Vol. 2. Thomson, 2004, p. 158.
-- [Codificação de Huffman](https://www.youtube.com/watch?v=xQQt5myz00o)
+
+- [Curso de C++ - Aula 53 - Árvore binária](https://www.youtube.com/watch?v=sEsGZtJdAts)
+
+- [Algoritmos e Estruturas de Dados/Árvores Binárias](https://pt.wikibooks.org/wiki/Algoritmos_e_Estruturas_de_Dados/%C3%81rvores_Bin%C3%A1rias)
+
+- [Quadtree - Wikipédia](https://en.wikipedia.org/wiki/Quadtree)
+
+- [Introdução à Estrutura de Dados Espaciais & QuadTree](http://www.decom.ufop.br/guilherme/BCC203/geral/ed2_introducao-estruturas-dados-espaciais_victor.pdf)
+
 - [Como a compressão de dados funciona? (Árvore de Huffman)](https://www.youtube.com/watch?v=-TonlL3vcGk)
+
+- [Codificação de Huffman](https://www.youtube.com/watch?v=xQQt5myz00o)
+
+- [How to Fix Error Makefile: *** missing separator. Stop](https://www.youtube.com/watch?v=2nM6DBE0blA)
