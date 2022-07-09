@@ -1,13 +1,17 @@
-#include <iostream>
-#include <cstdlib>
 #include <cmath>
 #include <string>
+#include <cstdlib>
+#include <iostream>
 
 #include <GL/glut.h>
 
+#include "winGL.h"
+
+#include "cNo.h"
 #include "cPonto.h"
 #include "cQuadrante.h"
-#include "winGL.h"
+#include "cQuadtree.h"
+
 #include "compressao.h"
 		
 unsigned char* 	image = NULL;	// image file
@@ -45,6 +49,17 @@ void desenhaArvore() {
 // ***                                               ***
 // *****************************************************
 void montaArvore() {
+	
+	cQuadtree  *arvore = new cQuadtree();
+
+	cPonto pontoBase(0,0);
+	cPonto pontoOposto(iWidth, iHeight);
+
+	cQuadrante *quadrante = new cQuadrante(pontoBase, pontoOposto, 0); // TODO: corrigir intensidade
+
+	cNo *raiz = new cNo(quadrante);
+
+	arvore->setRaiz(raiz);
 	
 	printf("Aqui eu vou montar a arvore\n");
 	
