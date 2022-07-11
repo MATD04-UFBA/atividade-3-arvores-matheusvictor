@@ -6,9 +6,10 @@ class cQuadrante {
 
 private:
 	cPonto	pBase;
-	int 	h,w;
+	int 	altura,largura;
 	int 	nivel;
 	int		intensidade;
+	char*   imagem;
 	float	erro;
 		
 public:

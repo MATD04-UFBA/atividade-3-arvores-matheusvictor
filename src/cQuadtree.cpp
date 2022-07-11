@@ -1,5 +1,5 @@
-#include "cNo.h"
 #include "cQuadtree.h"
+#include "cNo.h"
 
 cQuadtree::cQuadtree() {
     this->raiz = nullptr; 

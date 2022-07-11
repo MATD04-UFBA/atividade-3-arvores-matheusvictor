@@ -1,10 +1,10 @@
+#include "winGL.h"
 #include <iostream>
-
 #include <GL/glut.h>
 
 #include "cPonto.h"
 #include "cQuadrante.h"
-#include "winGL.h"
+
 #include "compressao.h"
 
 // *****************************************************
@@ -13,8 +13,8 @@
 cQuadrante::cQuadrante() {
 
 	pBase.setXY(0, 0);
-	h 			= 
-	w 			= 0;
+	altura		= 0;
+	largura		= 0;
 	nivel 		= 0;
 	intensidade = 0;
 	erro 		= 0.0f;
@@ -23,11 +23,11 @@ cQuadrante::cQuadrante() {
 // *****************************************************
 // ***                                               ***
 // *****************************************************
-cQuadrante::cQuadrante(cPonto p, cPonto q, int i){
+cQuadrante::cQuadrante(cPonto p1, cPonto p2, int i){
 
-	pBase.setXY(p.getX(), p.getY());
-	h 			= q.getY() - p.getY();
-	w 			= q.getX() - p.getX();
+	pBase.setXY(p1.getX(), p1.getY());
+	altura 		= p2.getY() - p1.getY();
+	largura 	= p2.getX() - p1.getX();
 	nivel 		= 0;
 	intensidade = i;
 	erro 		= 0.0f;
@@ -48,7 +48,7 @@ cPonto cQuadrante::getPtoBase() {
 // *****************************************************
 cPonto cQuadrante::getPtoOposto() {
 
-	cPonto p(pBase.getX() + w, pBase.getY() + h);
+	cPonto p(pBase.getX() + largura, pBase.getY() + altura);
 
 	return p;
 }
@@ -57,6 +57,5 @@ cPonto cQuadrante::getPtoOposto() {
 // ***                                               ***
 // *****************************************************
 int cQuadrante::getIntensidade() {
-
-	return intensidade;
+	return this->intensidade;
 }

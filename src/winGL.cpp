@@ -46,8 +46,8 @@ unsigned char* leImagem(std::string filename) {
     if (image == NULL) {
     	std::cout << "Erro carregando imagem " << filename << std::endl;
     	exit(0);
-    	}
-    
+    }
+
 	std::cout << "Imagem    => " << filename << std::endl;
 	std::cout << "Resolucao => " << iHeight << " x " << iWidth << std::endl;
 	std::cout << "Channels  => " << iChannels << std::endl;

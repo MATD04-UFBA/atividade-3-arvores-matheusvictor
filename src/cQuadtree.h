@@ -1,6 +1,7 @@
 #pragma once
 
 #include "cNo.h"
+#include "cQuadrante.h"
 
 class cQuadtree { 	
 

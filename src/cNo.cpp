@@ -10,10 +10,15 @@
 cNo::cNo(cQuadrante* q) {
 	this->quadrante = q;
 
+	this->pai = nullptr;
 	noSuperiorEsquerdo  = nullptr;
     noSuperiorDireito   = nullptr;
 	noInferiorEsquerdo  = nullptr;
 	noInferiorDireito  	= nullptr;
+}
+
+void cNo::setPai(cNo* pai) {
+	this->pai = pai;	
 }
 
 // ***********************************************
