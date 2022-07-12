@@ -13,7 +13,7 @@
 #include "cNo.h"
 #include "cPonto.h"
 #include "cQuadrante.h"
-#include "cQuadtree.h"
+#include "cArvoreQuad.h"
 
 #include "compressao.h"
 		
@@ -119,53 +119,47 @@ vector<cQuadrante> obterQuadrantesFilhos(cQuadrante* quadrante) {
 // ***                                               ***
 // *****************************************************
 void montaArvore() {
+		
+	cPonto pontoBase = cPonto(0,0);
+	cPonto pontoOposto = cPonto(iWidth, iHeight);
+
+	cArvoreQuad *arvore = new cArvoreQuad(pontoBase, pontoOposto);
 	
-	cQuadtree *arvore = new cQuadtree();
-
-	cPonto pontoBase(0,0);
-	cPonto pontoOposto(iWidth, iHeight);
-
-	//calcular intensidade média:	
-	int intensidade = 0;
-	for(int i = 0; i < iWidth; i ++) {
-		for(int j = 0; j < iHeight; j ++) {
-			unsigned int intensidadePixel = image[i*iWidth+j];
-			intensidade += intensidadePixel;
-		}
-	}
+	// //calcular intensidade média:	
+	// int intensidade = 0;
+	// for(int i = 0; i < iWidth; i ++) {
+	// 	for(int j = 0; j < iHeight; j ++) {
+	// 		unsigned int intensidadePixel = image[i*iWidth+j];
+	// 		intensidade += intensidadePixel;
+	// 	}
+	// }
 	
-	int intensidadeMedia = intensidade/(iWidth*iHeight);
-	std::cout << "Intensidade media => " << intensidadeMedia << std::endl;
+	// int intensidadeMedia = intensidade/(iWidth*iHeight);
+	// std::cout << "Intensidade media => " << intensidadeMedia << std::endl;
 
-	cQuadrante *quadrante = new cQuadrante(pontoBase, pontoOposto, intensidadeMedia);
+	// cQuadrante *quadrante = new cQuadrante(pontoBase, pontoOposto, intensidadeMedia);
 
-	cNo *noRaiz = new cNo(quadrante);
-	arvore->setRaiz(noRaiz);
-	std::cout << "No raiz" << arvore->getRaiz() << endl;
+	// cNo *noRaiz = new cNo(quadrante);
+	// arvore->setRaiz(noRaiz);
+	// std::cout << "No raiz" << arvore->getRaiz() << endl;
 
-	cNo* noAtual = arvore->getRaiz();
+	// cNo* noAtual = arvore->getRaiz();
 	
-	// faça até que o quadrante tenha apenas 1 pixel
-	while(true) {
+	// // faça até que o quadrante tenha apenas 1 pixel
+	// while(true) {
 
-		vector<cQuadrante> quadrantesFilhos = obterQuadrantesFilhos(noAtual->getQuadrante());
+	// 	vector<cQuadrante> quadrantesFilhos = obterQuadrantesFilhos(noAtual->getQuadrante());
 
-		if (quadrantesFilhos.empty()) {
-			break;
-		}
+	// 	if (quadrantesFilhos.empty()) {
+	// 		break;
+	// 	}
 
-		cNo* noSuperiorEsquerdo  = new cNo(&quadrantesFilhos[0]);
-    	cNo* noSuperiorDireito   = new cNo(&quadrantesFilhos[1]);
-		cNo* noInferiorDireito   = new cNo(&quadrantesFilhos[2]);
-		cNo* noInferiorEsquerdo  = new cNo(&quadrantesFilhos[3]);
+	// 	cNo* noSuperiorEsquerdo  = new cNo(&quadrantesFilhos[0]);
+    // 	cNo* noSuperiorDireito   = new cNo(&quadrantesFilhos[1]);
+	// 	cNo* noInferiorDireito   = new cNo(&quadrantesFilhos[2]);
+	// 	cNo* noInferiorEsquerdo  = new cNo(&quadrantesFilhos[3]);
 
-		noAtual->addNosFilhos(
-			noSuperiorEsquerdo,
-			noSuperiorDireito,
-			noInferiorDireito,
-			noInferiorEsquerdo
-		);
-	} 
+	// } 
 	
 }
 
