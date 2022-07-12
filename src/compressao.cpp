@@ -39,27 +39,72 @@ void desenhaArvore() {
 	// fornecendo os pontos inicial e final do quadrante e a sua cor
 	// funcao do valor do pixel ou da regiao que voce quer desenhar
 	
-	cPonto p0(0,0);
-	cPonto p1(iWidth/2, iHeight/2);
-	cPonto p2(iWidth, iHeight);
+	// cPonto p0(0,0);
+	// cPonto p1(iWidth/2, iHeight/2);
+	// cPonto p2(iWidth, iHeight);
 	 
-	cQuadrante q0(p0, p1, 64);
-	cQuadrante q1(p2, p1, 222);
+	// cQuadrante q0(p0, p1, 64);
+	// cQuadrante q1(p2, p1, 222);
 
-	desenhaQuadrante(q0.getPtoBase(), q0.getPtoOposto(), q0.getIntensidade());
-	desenhaQuadrante(q1.getPtoBase(), q1.getPtoOposto(), q1.getIntensidade());
+	// desenhaQuadrante(q0.getPtoBase(), q0.getPtoOposto(), q0.getIntensidade());
+	// desenhaQuadrante(q1.getPtoBase(), q1.getPtoOposto(), q1.getIntensidade());
 }
 
 
 vector<cQuadrante> obterQuadrantesFilhos(cQuadrante* quadrante) {
 	vector<cQuadrante> quadrantesFilhos;
 
+	// se PtoBase tiver as mesmas cordenadas X,Y de PtoOposto, retorná um vector vazio (sem coodernadas)
 	if (
 		quadrante->getPtoBase().getX() == quadrante->getPtoOposto().getX() &&
 		quadrante->getPtoBase().getY() == quadrante->getPtoOposto().getY()
 	) {
 		return quadrantesFilhos;
 	}
+
+	// verifica se o quadrante (pai) precisa ser quebrado em quadrantes filhos
+	int intensidade = 0;
+	int quantidadePixels = 0;
+	for(int i = quadrante->getPtoBase().getX(); i < quadrante->getPtoBase().getX()+ iWidth; i ++) {
+		for(int j = quadrante->getPtoOposto().getY(); j < quadrante->getPtoOposto().getY() + iHeight; j ++) {
+			unsigned int intensidadePixel = image[i*iWidth+j];
+			intensidade += intensidadePixel;
+			quantidadePixels++;
+		}
+	}
+
+	int quantidadePixelsIgualIntensidadeMedia = 0;
+	int intensidadeMedia = intensidade/(quantidadePixels);
+
+	// for praticamente igual?
+	for(int i = quadrante->getPtoBase().getX(); i < quadrante->getPtoBase().getX()+ iWidth; i ++) {
+		for(int j = quadrante->getPtoOposto().getY(); j < quadrante->getPtoOposto().getY() + iHeight; j ++) {
+			unsigned int intensidadePixel = image[i*iWidth+j];
+			if (intensidadePixel == quantidadePixelsIgualIntensidadeMedia) {
+				quantidadePixelsIgualIntensidadeMedia++;
+			}
+		}
+	}
+
+	// se todos os pixels do quadrante (pai) tiverem o mesmo valor da intensidadeMedia, não preciso ter filhos
+	if (quantidadePixelsIgualIntensidadeMedia == quantidadePixels)
+	{
+		return quadrantesFilhos;
+	}
+
+
+	// //calcular intensidade média:	
+	// int intensidade = 0;
+	// int quantidadePixels = 0;
+	// for(int i = p1.getX(); i < p1.getX() + largura; i ++) {
+	// 	for(int j = p1.getY(); j < p1.getY() + altura; j ++) {
+	// 		unsigned int intensidadePixel = imagem[i*larguraImagem+j];
+	// 		intensidade += intensidadePixel;
+	// 		quantidadePixels++;
+	// 	}
+	// }
+	
+	// int intensidadeMedia = intensidade/(quantidadePixels);
 
 	quadrantesFilhos.push_back(
 		cQuadrante(
@@ -68,7 +113,7 @@ vector<cQuadrante> obterQuadrantesFilhos(cQuadrante* quadrante) {
 				quadrante->getPtoOposto().getX() / 2, 
 				quadrante->getPtoOposto().getY() / 2
 			),
-			0 // corrigir calculo da intensidade
+			0
 		)
 	); //q1
 
@@ -82,7 +127,7 @@ vector<cQuadrante> obterQuadrantesFilhos(cQuadrante* quadrante) {
 				quadrante->getPtoOposto().getX(), 
 				quadrante->getPtoOposto().getY() / 2
 			),
-			0 // corrigir calculo da intensidade
+			0
 		)
 	); //q2
 
@@ -93,7 +138,7 @@ vector<cQuadrante> obterQuadrantesFilhos(cQuadrante* quadrante) {
 				quadrante->getPtoOposto().getY() / 2 +1 
 			),
 			quadrante->getPtoOposto(),
-			0 // corrigir calculo da intensidade
+			0
 		)
 	); //q3
 
@@ -108,7 +153,7 @@ vector<cQuadrante> obterQuadrantesFilhos(cQuadrante* quadrante) {
 				quadrante->getPtoOposto().getX() / 2, 
 				quadrante->getPtoOposto().getY()
 			),
-			0 // corrigir calculo da intensidade
+			0
 		)
 	); //q4
 
@@ -124,33 +169,25 @@ void montaArvore() {
 
 	cPonto pontoBase(0,0);
 	cPonto pontoOposto(iWidth, iHeight);
-
-	//calcular intensidade média:	
-	int intensidade = 0;
-	for(int i = 0; i < iWidth; i ++) {
-		for(int j = 0; j < iHeight; j ++) {
-			unsigned int intensidadePixel = image[i*iWidth+j];
-			intensidade += intensidadePixel;
-		}
-	}
-	
-	int intensidadeMedia = intensidade/(iWidth*iHeight);
-	std::cout << "Intensidade media => " << intensidadeMedia << std::endl;
-
-	cQuadrante *quadrante = new cQuadrante(pontoBase, pontoOposto, intensidadeMedia);
+	cQuadrante *quadrante = new cQuadrante(pontoBase, pontoOposto, 0);
 
 	cNo *noRaiz = new cNo(quadrante);
 	arvore->setRaiz(noRaiz);
-	std::cout << "No raiz" << arvore->getRaiz() << endl;
+	std::cout << "No raiz => " << arvore->getRaiz() << endl;
 
 	cNo* noAtual = arvore->getRaiz();
 	
 	// faça até que o quadrante tenha apenas 1 pixel
-	while(true) {
+	bool quadranteMaiorQueUmPixel = true;
+	while(quadranteMaiorQueUmPixel) {
+
+		cout << "Entrei no While" << endl;
 
 		vector<cQuadrante> quadrantesFilhos = obterQuadrantesFilhos(noAtual->getQuadrante());
 
-		if (quadrantesFilhos.empty()) {
+		if (quadrantesFilhos.empty()) {			
+			cout << "Entrei no if " << endl;
+			quadranteMaiorQueUmPixel = false;
 			break;
 		}
 
@@ -165,8 +202,7 @@ void montaArvore() {
 			noInferiorDireito,
 			noInferiorEsquerdo
 		);
-	} 
-	
+	}
 }
 
 
@@ -176,7 +212,8 @@ void montaArvore() {
 void teclado(unsigned char key, int x, int y) {
 
 	switch (key) {
-		case 27		: 	exit(0);
+		case 27		: 	exit(0); // equivale ao ESC na
+								 // tabela ASC II
 						break;				
 		case 'q'	:
 		case 'Q'	: 	montaArvore();

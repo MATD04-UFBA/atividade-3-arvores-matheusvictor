@@ -9,7 +9,6 @@ private:
 	int 	altura,largura;
 	int 	nivel;
 	int		intensidade;
-	char*   imagem;
 	float	erro;
 		
 public:
