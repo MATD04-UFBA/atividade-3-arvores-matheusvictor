@@ -1,15 +1,43 @@
 #pragma once
 
+#include "cPonto.h"
 #include "cQuadrante.h"
 
 class cNo	{ 	
 
 private:
-	cQuadrante* quadrante;
+	cQuadrante quadrante;
+	
+	cNo* pai;
+    cNo* noSuperiorEsquerdo;
+    cNo* noSuperiorDireito;
+	cNo* noInferiorDireito;
+	cNo* noInferiorEsquerdo;
 
 public:
+	cNo();
+	cNo(int largura, int altura, cPonto pBase);
 
-	cNo(cQuadrante* q);
+	void setQuadrante(cQuadrante q);
+	cQuadrante getQuadrante();
 
-	cQuadrante*	getQuadrante();
+	void 	setPai(cNo* pai); 
+	cNo* 	getPai();
+
+	void 	setFilhoSuperiorEsquerdo(cNo* no);
+	cNo* 	getFilhoSuperiorEsquerdo();
+
+	void 	setFilhoSuperiorDireito(cNo* no);
+	cNo* 	getFilhoSuperiorDireito();
+
+	void 	setFilhoInferiorDireito(cNo* no);
+	cNo* 	getFilhoInferiorDireito();
+
+	void 	setFilhoInferiorEsquerdo(cNo* no);
+	cNo* 	getFilhoInferiorEsquerdo();
+
+	bool ehRaiz();
+	bool ehFolha();
+	
+
 };

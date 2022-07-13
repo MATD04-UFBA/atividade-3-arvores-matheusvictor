@@ -1,32 +1,22 @@
 #pragma once
 
-#include "math.h"
-
 #include "cNo.h"
-#include "cArvoreQuad.h"
-#include "cPonto.h"
 #include "cQuadrante.h"
 
 class cArvoreQuad { 	
 
 private:
-	cNo* raiz;
+	cNo *raiz;	// representa a imagem
 
-	cPonto pixelBase;
-	cPonto pixelOposto;
- 
-    // Children of this tree
-    cArvoreQuad* arvoreSuperiorEsquerda;
-    cArvoreQuad* arvoreSuperiorDireita;
-    cArvoreQuad* arvoreInferiorDireita;
-    cArvoreQuad* arvoreInferiorEsquerda;	
-		
+	cNo* construirArvorePorRecursao(int largura, int altura);
+			
 public:
-	cArvoreQuad();
-	cArvoreQuad(cPonto pontoBase, cPonto pontoOposto);
 
-	void inserir(cNo* n);
-    bool ehLimite(cPonto p);
+	cArvoreQuad();
+	cArvoreQuad(int altura, int largura);
+	cArvoreQuad(unsigned char* imagem);
+	
+	~cArvoreQuad();
 
 	void setRaiz(cNo* n);
 	cNo* getRaiz();
