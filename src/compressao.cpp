@@ -1,4 +1,5 @@
 #include <cmath>
+#include <math.h>
 #include <iterator>
 #include <ostream>
 #include <string>
@@ -16,6 +17,7 @@
 #include "cArvoreQuad.h"
 
 #include "compressao.h"
+
 		
 using namespace std;	
 
@@ -53,12 +55,11 @@ void desenhaArvore() {
 void montaArvore() {
 		
 	cPonto pontoBase = cPonto(0,0);
-	// cPonto pontoOposto = cPonto(iWidth, iHeight);
-
 	cArvoreQuad *arvore = new cArvoreQuad(iWidth, iHeight, pontoBase);
 
-	cout << "Raiz = " << arvore->getRaiz() << endl;
-	
+	cout << "xRaiz = " << arvore->getRaiz()->getQuadrante().getPtoBase().getX() << endl;
+	cout << "yRaiz = " << arvore->getRaiz()->getQuadrante().getPtoBase().getY() << endl;
+
 	// //calcular intensidade média:	
 	// int intensidade = 0;
 	// for(int i = 0; i < iWidth; i ++) {
