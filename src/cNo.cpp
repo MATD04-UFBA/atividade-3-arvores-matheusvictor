@@ -2,6 +2,7 @@
 #include <iostream>
 
 #include "cNo.h"
+#include "cPonto.h"
 #include "cQuadrante.h"
 
 
@@ -18,7 +19,7 @@ cNo::cNo() {
 
 cNo::cNo(int altura, int largura, cPonto pBase) {
 
-	this->quadrante = cQuadrante();
+	this->quadrante = cQuadrante(pBase, cPonto(altura, largura), 0);
 
 	this->pai 				  = nullptr;
 	this->noSuperiorEsquerdo  = nullptr;
