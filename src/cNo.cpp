@@ -6,9 +6,8 @@
 
 
 cNo::cNo() {
-	
-	this->quadrante.setAltura(0);
-	this->quadrante.setLargura(0);
+
+	this->quadrante = cQuadrante();
 
 	this->pai 				  = nullptr;
 	this->noSuperiorEsquerdo  = nullptr;
@@ -19,9 +18,7 @@ cNo::cNo() {
 
 cNo::cNo(int altura, int largura, cPonto pBase) {
 
-	this->quadrante.setAltura(altura);
-	this->quadrante.setLargura(largura);
-	pBase.setXY(0, 0);
+	this->quadrante = cQuadrante();
 
 	this->pai 				  = nullptr;
 	this->noSuperiorEsquerdo  = nullptr;
