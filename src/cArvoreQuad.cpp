@@ -20,10 +20,13 @@ cNo* cArvoreQuad::getRaiz() {
     return this->raiz;
 }
 
-cNo* cArvoreQuad::construirArvorePorRecursao(int largura, int altura, cPonto pBase, cPonto pOposto) {
+cNo* cArvoreQuad::construirArvorePorRecursao(int _largura, int _altura, cPonto pBase, cPonto pOposto) {
     
     // cPonto     pontoBase = p;
-    cQuadrante quadrante = cQuadrante(pBase, pOposto, 0);
+    cQuadrante quadrante = cQuadrante(pBase, pOposto, 0); // 1ª vez: pBase = (0,0), pOposto = (7, 7)
+
+    int largura = _largura;
+    int altura  = _altura;
 
     if (largura == 1 && altura == 1) return nullptr; // chegou ao pixel, não precisa mais continuar a divisão
 
@@ -32,15 +35,37 @@ cNo* cArvoreQuad::construirArvorePorRecursao(int largura, int altura, cPonto pBa
 
     // int p0 = p.getX();
 
-    cPonto pBFSuperiorEsquerdo   = cPonto(pBase.getX(), pBase.getY());
-    cPonto pBFSuperiorDireito    = cPonto();
+    // quadrante.getPtoBase().getX();
 
-    cPonto pBFInferiorDireito    = cPonto();
-    cPonto pBFInferiorEsquerdo   = cPonto(quadrante.getPtoBase().getX(), (quadrante.getPtoOposto().getY() / 2) + 1);
+    cPonto pBFSuperiorEsquerdo   = cPonto(
+                                          quadrante.getPtoBase().getX(),
+                                          quadrante.getPtoBase().getY()
+                                        );
 
-    // pBase.setXY(l, a);
+    cPonto pBFSuperiorDireito    = cPonto(
+                                            quadrante.getPtoBase().getX() + largura / 2,
+				                            quadrante.getPtoBase().getY() 
+                                        );
 
-    // novoNo->setFilhoSuperiorEsquerdo(construirArvorePorRecursao(l, 0, pBFSuperiorEsquerdo, pBFSuperiorEsquerdo));
+    cPonto pBFInferiorDireito    = cPonto(
+                                            quadrante.getPtoBase().getX() + largura / 2,
+                                            quadrante.getPtoBase().getY() + altura / 2
+                                        );
+    
+    cPonto pBFInferiorEsquerdo   = cPonto(
+                                            quadrante.getPtoBase().getX(),
+                                            quadrante.getPtoBase().getY() + altura / 2
+                                        );                                        
+
+    novoNo->setFilhoSuperiorEsquerdo(
+                                        construirArvorePorRecursao(
+                                            largura, altura, pBFSuperiorEsquerdo, pOposto
+                                        )
+                                    );
+    
+    largura /= 2;
+    altura /= 2;
+
     // novoNo->setFilhoSuperiorDireito(construirArvorePorRecursao(l, a));
 
     // novoNo->setFilhoInferiorDireito(construirArvorePorRecursao(l, a));
