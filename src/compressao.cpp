@@ -13,7 +13,7 @@
 #include "cNo.h"
 #include "cPonto.h"
 #include "cQuadrante.h"
-#include "cQuadtree.h"
+#include "cArvoreQuad.h"
 
 #include "compressao.h"
 		
@@ -50,122 +50,34 @@ void desenhaArvore() {
 	desenhaQuadrante(q1.getPtoBase(), q1.getPtoOposto(), q1.getIntensidade());
 }
 
-
-vector<cQuadrante> obterQuadrantesFilhos(cQuadrante* quadrante) {
-	vector<cQuadrante> quadrantesFilhos;
-
-	if (
-		quadrante->getPtoBase().getX() == quadrante->getPtoOposto().getX() &&
-		quadrante->getPtoBase().getY() == quadrante->getPtoOposto().getY()
-	) {
-		return quadrantesFilhos;
-	}
-
-	quadrantesFilhos.push_back(
-		cQuadrante(
-			quadrante->getPtoBase(),
-			cPonto(
-				quadrante->getPtoOposto().getX() / 2, 
-				quadrante->getPtoOposto().getY() / 2
-			),
-			0 // corrigir calculo da intensidade
-		)
-	); //q1
-
-	quadrantesFilhos.push_back(
-		cQuadrante(
-			cPonto(
-				quadrante->getPtoOposto().getX() / 2 +1,
-				quadrante->getPtoBase().getY() 
-			),
-			cPonto(
-				quadrante->getPtoOposto().getX(), 
-				quadrante->getPtoOposto().getY() / 2
-			),
-			0 // corrigir calculo da intensidade
-		)
-	); //q2
-
-	quadrantesFilhos.push_back(
-		cQuadrante(
-			cPonto(
-				quadrante->getPtoOposto().getX() / 2 +1,
-				quadrante->getPtoOposto().getY() / 2 +1 
-			),
-			quadrante->getPtoOposto(),
-			0 // corrigir calculo da intensidade
-		)
-	); //q3
-
-
-	quadrantesFilhos.push_back(
-		cQuadrante(
-			cPonto(
-				quadrante->getPtoBase().getX(),
-				quadrante->getPtoOposto().getY() / 2 +1 
-			),
-			cPonto(
-				quadrante->getPtoOposto().getX() / 2, 
-				quadrante->getPtoOposto().getY()
-			),
-			0 // corrigir calculo da intensidade
-		)
-	); //q4
-
-	return quadrantesFilhos; 
-}
-
-// *****************************************************
-// ***                                               ***
-// *****************************************************
 void montaArvore() {
+		
+	cPonto pontoBase = cPonto(0,0);
+	// cPonto pontoOposto = cPonto(iWidth, iHeight);
+
+	cArvoreQuad *arvore = new cArvoreQuad(iWidth, iHeight, pontoBase);
+
+	cout << "Raiz = " << arvore->getRaiz() << endl;
 	
-	cQuadtree *arvore = new cQuadtree();
-
-	cPonto pontoBase(0,0);
-	cPonto pontoOposto(iWidth, iHeight);
-
-	//calcular intensidade média:	
-	int intensidade = 0;
-	for(int i = 0; i < iWidth; i ++) {
-		for(int j = 0; j < iHeight; j ++) {
-			unsigned int intensidadePixel = image[i*iWidth+j];
-			intensidade += intensidadePixel;
-		}
-	}
+	// //calcular intensidade média:	
+	// int intensidade = 0;
+	// for(int i = 0; i < iWidth; i ++) {
+	// 	for(int j = 0; j < iHeight; j ++) {
+	// 		unsigned int intensidadePixel = image[i*iWidth+j];
+	// 		intensidade += intensidadePixel;
+	// 	}
+	// }
 	
-	int intensidadeMedia = intensidade/(iWidth*iHeight);
-	std::cout << "Intensidade media => " << intensidadeMedia << std::endl;
+	// int intensidadeMedia = intensidade/(iWidth*iHeight);
+	// std::cout << "Intensidade media => " << intensidadeMedia << std::endl;
 
-	cQuadrante *quadrante = new cQuadrante(pontoBase, pontoOposto, intensidadeMedia);
+	// cQuadrante *quadrante = new cQuadrante(pontoBase, pontoOposto, intensidadeMedia);
 
-	cNo *noRaiz = new cNo(quadrante);
-	arvore->setRaiz(noRaiz);
-	std::cout << "No raiz" << arvore->getRaiz() << endl;
+	// cNo *noRaiz = new cNo(quadrante);
+	// arvore->setRaiz(noRaiz);
+	// std::cout << "No raiz" << arvore->getRaiz() << endl;
 
-	cNo* noAtual = arvore->getRaiz();
-	
-	// faça até que o quadrante tenha apenas 1 pixel
-	while(true) {
-
-		vector<cQuadrante> quadrantesFilhos = obterQuadrantesFilhos(noAtual->getQuadrante());
-
-		if (quadrantesFilhos.empty()) {
-			break;
-		}
-
-		cNo* noSuperiorEsquerdo  = new cNo(&quadrantesFilhos[0]);
-    	cNo* noSuperiorDireito   = new cNo(&quadrantesFilhos[1]);
-		cNo* noInferiorDireito   = new cNo(&quadrantesFilhos[2]);
-		cNo* noInferiorEsquerdo  = new cNo(&quadrantesFilhos[3]);
-
-		noAtual->addNosFilhos(
-			noSuperiorEsquerdo,
-			noSuperiorDireito,
-			noInferiorDireito,
-			noInferiorEsquerdo
-		);
-	} 
+	// cNo* noAtual = arvore->getRaiz();
 	
 }
 

@@ -4,55 +4,77 @@
 #include "cNo.h"
 #include "cQuadrante.h"
 
-// ***********************************************
-// ******                                   ******
-// ***********************************************
-cNo::cNo(cQuadrante* q) {
-	this->quadrante = q;
 
-	this->pai = nullptr;
-	noSuperiorEsquerdo  = nullptr;
-    noSuperiorDireito   = nullptr;
-	noInferiorEsquerdo  = nullptr;
-	noInferiorDireito  	= nullptr;
+cNo::cNo() {
+
+	this->quadrante = cQuadrante();
+
+	this->pai 				  = nullptr;
+	this->noSuperiorEsquerdo  = nullptr;
+    this->noSuperiorDireito   = nullptr;
+	this->noInferiorEsquerdo  = nullptr;
+	this->noInferiorDireito   = nullptr;
+}
+
+cNo::cNo(int altura, int largura, cPonto pBase) {
+
+	this->quadrante = cQuadrante();
+
+	this->pai 				  = nullptr;
+	this->noSuperiorEsquerdo  = nullptr;
+    this->noSuperiorDireito   = nullptr;
+	this->noInferiorEsquerdo  = nullptr;
+	this->noInferiorDireito   = nullptr;
 }
 
 void cNo::setPai(cNo* pai) {
 	this->pai = pai;	
 }
 
-// ***********************************************
-// ******                                   ******
-// ***********************************************
-void cNo::addNosFilhos(cNo *n1, cNo *n2, cNo *n3, cNo *n4) {
-	noSuperiorEsquerdo  = n1;
-    noSuperiorDireito   = n2;
-	noInferiorDireito  	= n3;
-	noInferiorEsquerdo  = n4;
-
-	noSuperiorEsquerdo->setPai(this);
-    noSuperiorDireito->setPai(this);
-	noInferiorDireito->setPai(this);
-	noInferiorEsquerdo->setPai(this);
+cNo* cNo::getPai() {
+	return this->pai;
 }
 
-// ***********************************************
-// ******                                   ******
-// ***********************************************
-cQuadrante* cNo::getQuadrante() {
+cQuadrante cNo::getQuadrante() {
 	return this->quadrante;
 }
 
-// ***********************************************
-// ******                                   ******
-// ***********************************************
+void cNo::setFilhoSuperiorEsquerdo(cNo *no) {
+	this->noSuperiorEsquerdo = no;
+}
+
+cNo* cNo::getFilhoSuperiorEsquerdo() {
+	return this->noSuperiorEsquerdo;
+}
+
+void cNo::setFilhoSuperiorDireito(cNo *no) {
+	this->noSuperiorDireito = no;
+}
+
+cNo* cNo::getFilhoSuperiorDireito() {
+	return this->noSuperiorDireito;
+}
+
+void cNo::setFilhoInferiorDireito(cNo *no) {
+	this->noInferiorDireito = no;
+}
+
+cNo* cNo::getFilhoInferiorDireito() {
+	return this->noInferiorDireito;
+}
+
+void cNo::setFilhoInferiorEsquerdo(cNo *no) {
+	this->noInferiorEsquerdo = no;
+}
+
+cNo* cNo::getFilhoInferiorEsquerdo() {
+	return this->noInferiorEsquerdo;
+}
+
 bool cNo::ehRaiz() {
 	return this->pai == nullptr;
 }
 
-// ***********************************************
-// ******                                   ******
-// ***********************************************
 bool cNo::ehFolha() {
 	return this->noSuperiorEsquerdo == nullptr &&
 	this->noSuperiorDireito == nullptr &&
