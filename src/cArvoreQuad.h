@@ -9,12 +9,12 @@ class cArvoreQuad {
 private:
 	cNo *raiz;	// representa a imagem
 
-	cNo* construirArvorePorRecursao(int largura, int altura, cPonto pBase, cPonto pOposto);
+	cNo* construirArvorePorRecursao(int largura, int altura, cPonto pBase);
 			
 public:
 
 	cArvoreQuad();
-	cArvoreQuad(int altura, int largura, cPonto p, cPonto pOposto);
+	cArvoreQuad(int altura, int largura, cPonto pBase);
 	cArvoreQuad(unsigned char* imagem);
 	
 	~cArvoreQuad();

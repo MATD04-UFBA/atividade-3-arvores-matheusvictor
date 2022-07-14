@@ -50,80 +50,14 @@ void desenhaArvore() {
 	desenhaQuadrante(q1.getPtoBase(), q1.getPtoOposto(), q1.getIntensidade());
 }
 
-
-vector<cQuadrante> obterQuadrantesFilhos(cQuadrante* quadrante) {
-	vector<cQuadrante> quadrantesFilhos;
-
-	if (
-		quadrante->getPtoBase().getX() == quadrante->getPtoOposto().getX() &&
-		quadrante->getPtoBase().getY() == quadrante->getPtoOposto().getY()
-	) {
-		return quadrantesFilhos;
-	}
-
-	quadrantesFilhos.push_back(
-		cQuadrante(
-			quadrante->getPtoBase(),
-			cPonto(
-				quadrante->getPtoOposto().getX() / 2, 
-				quadrante->getPtoOposto().getY() / 2
-			),
-			0 // corrigir calculo da intensidade
-		)
-	); //q1
-
-	quadrantesFilhos.push_back(
-		cQuadrante(
-			cPonto(
-				quadrante->getPtoOposto().getX() / 2 +1,
-				quadrante->getPtoBase().getY() 
-			),
-			cPonto(
-				quadrante->getPtoOposto().getX(), 
-				quadrante->getPtoOposto().getY() / 2
-			),
-			0 // corrigir calculo da intensidade
-		)
-	); //q2
-
-	quadrantesFilhos.push_back(
-		cQuadrante(
-			cPonto(
-				quadrante->getPtoOposto().getX() / 2 +1,
-				quadrante->getPtoOposto().getY() / 2 +1 
-			),
-			quadrante->getPtoOposto(),
-			0 // corrigir calculo da intensidade
-		)
-	); //q3
-
-
-	quadrantesFilhos.push_back(
-		cQuadrante(
-			cPonto(
-				quadrante->getPtoBase().getX(),
-				quadrante->getPtoOposto().getY() / 2 +1 
-			),
-			cPonto(
-				quadrante->getPtoOposto().getX() / 2, 
-				quadrante->getPtoOposto().getY()
-			),
-			0 // corrigir calculo da intensidade
-		)
-	); //q4
-
-	return quadrantesFilhos; 
-}
-
-// *****************************************************
-// ***                                               ***
-// *****************************************************
 void montaArvore() {
 		
 	cPonto pontoBase = cPonto(0,0);
-	cPonto pontoOposto = cPonto(iWidth, iHeight);
+	// cPonto pontoOposto = cPonto(iWidth, iHeight);
 
-	cArvoreQuad *arvore = new cArvoreQuad(pontoBase, pontoOposto);
+	cArvoreQuad *arvore = new cArvoreQuad(iWidth, iHeight, pontoBase);
+
+	cout << "Raiz = " << arvore->getRaiz() << endl;
 	
 	// //calcular intensidade média:	
 	// int intensidade = 0;
@@ -144,22 +78,6 @@ void montaArvore() {
 	// std::cout << "No raiz" << arvore->getRaiz() << endl;
 
 	// cNo* noAtual = arvore->getRaiz();
-	
-	// // faça até que o quadrante tenha apenas 1 pixel
-	// while(true) {
-
-	// 	vector<cQuadrante> quadrantesFilhos = obterQuadrantesFilhos(noAtual->getQuadrante());
-
-	// 	if (quadrantesFilhos.empty()) {
-	// 		break;
-	// 	}
-
-	// 	cNo* noSuperiorEsquerdo  = new cNo(&quadrantesFilhos[0]);
-    // 	cNo* noSuperiorDireito   = new cNo(&quadrantesFilhos[1]);
-	// 	cNo* noInferiorDireito   = new cNo(&quadrantesFilhos[2]);
-	// 	cNo* noInferiorEsquerdo  = new cNo(&quadrantesFilhos[3]);
-
-	// } 
 	
 }
 
