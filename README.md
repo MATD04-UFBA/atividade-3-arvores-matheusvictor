@@ -175,6 +175,8 @@ Existem alguns tipos de Quadtree, tais como _Region Quadtree_, _Point QuadTree_,
 
 - [Quadtree - Wikipédia](https://en.wikipedia.org/wiki/Quadtree)
 
+- [Quad Tree - Geeks for Geeks](https://www.geeksforgeeks.org/quad-tree/)
+
 - [Introdução à Estrutura de Dados Espaciais & QuadTree](http://www.decom.ufop.br/guilherme/BCC203/geral/ed2_introducao-estruturas-dados-espaciais_victor.pdf)
 
 - [Como a compressão de dados funciona? (Árvore de Huffman)](https://www.youtube.com/watch?v=-TonlL3vcGk)
