@@ -1,6 +1,7 @@
 #include "winGL.h"
 #include <iostream>
 #include <GL/glut.h>
+#include <string> 
 
 #include "cPonto.h"
 #include "cQuadrante.h"
@@ -62,10 +63,31 @@ int cQuadrante::getLargura() {
 	return this->largura;
 }
 
-int cQuadrante::calcularIntensidade() {
-	return 0; //TODO: calcular intensidade média
+int cQuadrante::calcularIntensidade(unsigned char* imagem, int largura, int altura) {
+
+	int intensidade = 0;
+
+	for(int i = 0; i < largura; i ++) {
+
+		for(int j = 0; j < altura; j ++) {
+			unsigned int intensidadePixel = imagem[i*largura+j];
+	 		intensidade += intensidadePixel;
+		}
+	}
+	
+	int intensidadeMedia = intensidade/(largura*altura);
+
+	return intensidadeMedia;
+}
+
+void cQuadrante::setIntensidade(int intensidade) {
+	this->intensidade = intensidade;
 }
 
 int cQuadrante::getIntensidade() {
 	return this->intensidade;
+}
+
+int cQuadrante::getTamnhoQuadrante() {
+	return this->largura * this->altura;
 }

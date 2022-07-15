@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string> 
 #include "cPonto.h"
 
 class cQuadrante { 	
@@ -26,6 +27,9 @@ public:
 	void	setLargura(int l);
 	int 	getLargura();
 
-	int 	calcularIntensidade();	 
+	int 	calcularIntensidade(unsigned char* imagem, int largura, int altura);	 
+	void 	setIntensidade(int intensidade);
 	int 	getIntensidade();
+
+	int 	getTamnhoQuadrante();
 };
