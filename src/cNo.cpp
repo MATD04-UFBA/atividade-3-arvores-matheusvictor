@@ -5,6 +5,8 @@
 #include "cPonto.h"
 #include "cQuadrante.h"
 
+#include "winGL.h"
+
 
 cNo::cNo() {
 
@@ -81,4 +83,49 @@ bool cNo::ehFolha() {
 	this->noSuperiorDireito == nullptr &&
 	this->noInferiorEsquerdo == nullptr &&
 	this->noInferiorDireito == nullptr;
+}
+
+void cNo::setQuadIntensidade(int i) {
+
+	quadrante.setIntensidade(i);
+}
+
+// ******************************************************
+// ***
+// ******************************************************
+void cNo::desenha() {
+
+	desenhaQuadrante(quadrante.getPtoBase(), quadrante.getPtoOposto(), quadrante.getIntensidade());
+
+	if (noSuperiorDireito)
+		noSuperiorDireito->desenha();
+	if (noSuperiorEsquerdo)
+		noSuperiorEsquerdo->desenha();
+	if (noInferiorDireito)
+		noInferiorDireito->desenha();
+	if (noInferiorEsquerdo)
+		noInferiorEsquerdo->desenha();
+
+}
+
+// ******************************************************
+// ***
+// ******************************************************
+std::ostream &operator<<( std::ostream &output, const cNo &no) { 
+
+    output << no.quadrante << std::endl;
+
+    if (no.noSuperiorEsquerdo)
+    	output << *(no.noSuperiorEsquerdo) << std::endl;
+
+    if (no.noSuperiorDireito)
+    	output << *(no.noSuperiorDireito) << std::endl;
+
+    if (no.noInferiorEsquerdo)
+    	output << *(no.noInferiorEsquerdo) << std::endl;
+
+    if (no.noInferiorDireito)
+    	output << *(no.noInferiorDireito);
+
+    return output;            
 }

@@ -25,4 +25,8 @@ public:
 	void setRaiz(cNo* n);
 	cNo* getRaiz();
 
+	void desenha();
+	
+	friend std::ostream &operator<<( std::ostream &output, const cArvoreQuad &r);
+
 };

@@ -32,4 +32,7 @@ public:
 	int 	getIntensidade();
 
 	int 	getTamnhoQuadrante();
+
+	friend std::ostream &operator<<( std::ostream &output, const cQuadrante &q);
+
 };

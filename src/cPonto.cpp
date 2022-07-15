@@ -38,4 +38,14 @@ void cPonto::setXY(int x, int y) {
 	this->x = x;
 	this->y = y;
 }
-						
+	
+// ******************************************************
+// ***
+// ******************************************************
+std::ostream &operator<<( std::ostream &output, const cPonto &p) { 
+
+    output << "( " << p.x << " , " << p.y << " )" << std::endl;
+
+    return output;            
+}
+

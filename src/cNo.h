@@ -36,8 +36,13 @@ public:
 	void 	setFilhoInferiorEsquerdo(cNo* no);
 	cNo* 	getFilhoInferiorEsquerdo();
 
+	void setQuadIntensidade(int i);
+
 	bool ehRaiz();
 	bool ehFolha();
-	
+
+	void desenha();
+		
+	friend std::ostream &operator<<( std::ostream &output, const cNo &no);
 
 };

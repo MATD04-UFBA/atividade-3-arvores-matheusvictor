@@ -28,41 +28,32 @@ int 			iHeight,
 
 bool 			desenha = false;
 
+cArvoreQuad *arvore = NULL;
 
 // *****************************************************
 // ***                                               ***
 // *****************************************************
 void desenhaArvore() {
 
-	printf("Aqui eu vou desenhar a arvore\n");
-	
-	// rotina que deve ser implementada para visualizacao da arvore
-	// utilize a rotina desenhaQuadrante(p0, p1, cor)
-	// fornecendo os pontos inicial e final do quadrante e a sua cor
-	// funcao do valor do pixel ou da regiao que voce quer desenhar
-	
-	cPonto p0(0,0);
-	cPonto p1(iWidth/2, iHeight/2);
-	cPonto p2(iWidth, iHeight);
-	 
-	cQuadrante q0(p0, p1, 64);
-	cQuadrante q1(p2, p1, 222);
-
-	desenhaQuadrante(q0.getPtoBase(), q0.getPtoOposto(), q0.getIntensidade());
-	desenhaQuadrante(q1.getPtoBase(), q1.getPtoOposto(), q1.getIntensidade());
+	arvore->desenha();
 }
 
 void montaArvore() {
 		
 	cPonto pontoBase = cPonto(0,0);
-	cArvoreQuad *arvore = new cArvoreQuad(iWidth, iHeight, pontoBase);
+	arvore = new cArvoreQuad(iWidth, iHeight, pontoBase);
 
-	cQuadrante quadrante = cQuadrante(cPonto(0,0), cPonto(iWidth, iHeight), 0);
+	std::cout << "arvore Montada" << std::endl;
+	std::cout << *arvore << std::endl;
+	std::cout << "********************" << std::endl;
 
-	std::cout << "Imagem => " << image << std::endl;
 
-	std::cout << "Tamanho do quadrante => " << quadrante.getTamnhoQuadrante() << std::endl;
-	std::cout << "Intensidade media => " << quadrante.calcularIntensidade(image, iWidth, iHeight) << std::endl;
+	// cQuadrante quadrante = cQuadrante(cPonto(0,0), cPonto(iWidth, iHeight), 0);
+
+	// std::cout << "Imagem => " << image << std::endl;
+
+	// std::cout << "Tamanho do quadrante => " << quadrante.getTamnhoQuadrante() << std::endl;
+	// std::cout << "Intensidade media => " << quadrante.calcularIntensidade(image, iWidth, iHeight) << std::endl;
 
 
 	// cNo *noRaiz = new cNo(quadrante);

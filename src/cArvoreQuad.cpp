@@ -36,17 +36,26 @@ cNo* cArvoreQuad::construirArvorePorRecursao(int _largura, int _altura, cPonto p
         (pBase.getY() + altura)
     );
         
-    cQuadrante quadrante = cQuadrante(pBase, pOposto, 0);
+    int filho = rand() % 4;
 
-    std::cout << "Tamanho do quadrante => " << quadrante.getTamnhoQuadrante() << std::endl;
-	std::cout << "Intensidade media do quadrante => " << quadrante.calcularIntensidade(image, _largura, _altura) << std::endl;
+    std::cout << filho * 64 << std::endl; 
+
+    cQuadrante quadrante = cQuadrante(pBase, pOposto, filho * 64);
+
+ //    std::cout << "Tamanho do quadrante => " << quadrante.getTamnhoQuadrante() << std::endl;
+	// std::cout << "Intensidade media do quadrante => " << quadrante.calcularIntensidade(image, _largura, _altura) << std::endl;
 
     cNo *novoNo = new cNo(largura, altura, pBase);
     if (novoNo == nullptr) return novoNo; // alocação de novoNo mau-sucedida
 
-    if (quadrante.getPtoBase().getX() == quadrante.getPtoOposto().getX() &&
-        quadrante.getPtoBase().getY() == quadrante.getPtoOposto().getY()
-    ) return novoNo;
+    novoNo->setQuadIntensidade(filho * 64);
+
+    std::cout << novoNo->getQuadrante().getIntensidade() << std::endl;
+
+    if (nivel == 2)
+    // if (    quadrante.getPtoBase().getX() == quadrante.getPtoOposto().getX() &&
+    //         quadrante.getPtoBase().getY() == quadrante.getPtoOposto().getY() ) 
+        return novoNo;
 
     cPonto q1   = cPonto(
                                             quadrante.getPtoBase().getX(),
@@ -75,3 +84,24 @@ cNo* cArvoreQuad::construirArvorePorRecursao(int _largura, int _altura, cPonto p
 
     return novoNo;
 }
+
+// ******************************************************
+// ***
+// ******************************************************
+void cArvoreQuad::desenha() {
+
+    if (raiz)
+        raiz->desenha();
+}
+
+
+// ******************************************************
+// ***
+// ******************************************************
+std::ostream &operator<<( std::ostream &output, const cArvoreQuad &r) {
+
+    output << *(r.raiz) << std::endl;
+
+    return output;
+
+} 

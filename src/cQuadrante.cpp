@@ -91,3 +91,20 @@ int cQuadrante::getIntensidade() {
 int cQuadrante::getTamnhoQuadrante() {
 	return this->largura * this->altura;
 }
+
+
+// ******************************************************
+// ***
+// ******************************************************
+std::ostream &operator<<( std::ostream &output, const cQuadrante &q) { 
+
+    output << "------------------------------"<< std::endl;
+    // output << q.pBase 		<< std::endl;
+    // output << q.altura 		<< " x " 
+    // 						<< q.largura << std::endl;
+    // output << q.nivel 		<< std::endl;
+    output << q.intensidade << std::endl;
+    // output << q.erro		<< std::endl;
+
+    return output;            
+}
