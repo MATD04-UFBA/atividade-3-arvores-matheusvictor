@@ -57,9 +57,6 @@ void montaArvore() {
 	cPonto pontoBase = cPonto(0,0);
 	cArvoreQuad *arvore = new cArvoreQuad(iWidth, iHeight, pontoBase);
 
-	cout << "xRaiz = " << arvore->getRaiz()->getQuadrante().getPtoBase().getX() << endl;
-	cout << "yRaiz = " << arvore->getRaiz()->getQuadrante().getPtoBase().getY() << endl;
-
 	// //calcular intensidade média:	
 	// int intensidade = 0;
 	// for(int i = 0; i < iWidth; i ++) {
@@ -153,6 +150,6 @@ std::string filename("images/lena.png");
     initOpenGL();
     
     initEventos();
-    
+
     return 0;   
 }

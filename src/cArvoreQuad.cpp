@@ -1,4 +1,7 @@
+#include <cmath>
 #include <iostream>
+#include <ostream>
+#include <stdlib.h>
 
 #include "cNo.h"
 #include "cPonto.h"
@@ -7,11 +10,10 @@
 
 cArvoreQuad::cArvoreQuad() {
     this->raiz = nullptr;
-    // this->raiz = construirArvorePorRecursao();
 }
 
 cArvoreQuad::cArvoreQuad(int largura, int altura, cPonto pBase) {
-    this->raiz = construirArvorePorRecursao(largura, altura, pBase);
+    this->raiz = construirArvorePorRecursao(largura -1, altura - 1, pBase, 0, 1);
 }
 
 void cArvoreQuad::setRaiz(cNo* n) {
@@ -22,77 +24,49 @@ cNo* cArvoreQuad::getRaiz() {
     return this->raiz;
 }
 
-cNo* cArvoreQuad::construirArvorePorRecursao(int _largura, int _altura, cPonto pBase) {
+cNo* cArvoreQuad::construirArvorePorRecursao(int _largura, int _altura, cPonto pBase, int nivel, int numeroQuadrante) {
     
-    static int numeroDeQuadrantes = 0;
     int largura = _largura;
     int altura  = _altura;
 
-    cPonto pOposto = cPonto(largura, altura);
-    
-    std::cout << "pBase = " << "(" << pBase.getX() << "," << pBase.getY() << ")" << std::endl;
-    std::cout << "pOposto = " << "(" << pOposto.getX() << "," << pOposto.getY() << ")" << std::endl;
-    
+    cPonto pOposto = cPonto(
+        (pBase.getX() + largura),
+        (pBase.getY() + altura)
+    );
+        
     cQuadrante quadrante = cQuadrante(pBase, pOposto, 0);
-    
-    numeroDeQuadrantes++;
-    std::cout << "========================================================" << std::endl;
-    std::cout << "CRIADO O Q" << numeroDeQuadrantes << std::endl;
-    std::cout << "========================================================" << std::endl;
-
-    std::cout << "pBase quadrante = (" << quadrante.getPtoBase().getX() << ", " << quadrante.getPtoBase().getY() << ")" << std::endl;
-    std::cout << "pOposto quadrante = (" << quadrante.getPtoOposto().getX() << ", " << quadrante.getPtoOposto().getY() << ")" << std::endl;
-
-    
-    if (largura == 1 && altura == 1) {
-        // pOposto.setXY(pBase.getX(), pBase.getY());
-        return nullptr; // chegou ao pixel, não precisa mais continuar a divisão
-    }
-
-    /*
-	if (quadrante.getPtoBase().getX() == quadrante.getPtoOposto().getY() &&
-        quadrante.getPtoBase().getY() == quadrante.getPtoOposto().getY()
-    ) return nullptr;
-    */
-
     cNo *novoNo = new cNo(largura, altura, pBase);
+
     if (novoNo == nullptr) return novoNo; // alocação de novoNo mau-sucedida
 
-    cPonto pBFSuperiorEsquerdo   = cPonto(quadrante.getPtoBase().getX(), quadrante.getPtoBase().getY());
-    cPonto pBFSuperiorDireito    = cPonto(quadrante.getPtoBase().getX() + largura / 2, quadrante.getPtoBase().getY());
+    if (quadrante.getPtoBase().getX() == quadrante.getPtoOposto().getX() &&
+        quadrante.getPtoBase().getY() == quadrante.getPtoOposto().getY()
+    ) return novoNo;
 
-    cPonto pBFInferiorDireito    = cPonto(quadrante.getPtoBase().getX() + largura / 2, quadrante.getPtoBase().getY() + altura / 2);
-    cPonto pBFInferiorEsquerdo   = cPonto(quadrante.getPtoBase().getX(), quadrante.getPtoBase().getY() + altura / 2);                                        
-    
-    std::cout << "pBFSuperiorEsquerdo = (" << pBFSuperiorEsquerdo.getX() << "), (" << pBFSuperiorEsquerdo.getY() << ")" << std::endl;
-    std::cout << "pBFSuperiorDireito = (" << pBFSuperiorDireito.getX() << "), (" << pBFSuperiorDireito.getY() << ")" << std::endl;
+    cPonto q1   = cPonto(
+                                            quadrante.getPtoBase().getX(),
+                                            quadrante.getPtoBase().getY()
+                                        );
 
-    std::cout << "pBFInferiorDireito = (" << pBFInferiorDireito.getX() << "), (" << pBFInferiorDireito.getY() << ")" << std::endl;
-    std::cout << "pBFInferiorEsquerdo = (" << pBFInferiorEsquerdo.getX() << "), (" << pBFInferiorEsquerdo.getY() << ")" << std::endl;
+    cPonto q4   = cPonto(
+                                            quadrante.getPtoBase().getX(),
+                                            ceil( (quadrante.getPtoBase().getY() + altura) / 2) + 1
+                                        );                                        
 
-    std::cout << "========================================================" << std::endl;
+    cPonto q2    = cPonto(
+                                            ceil( (quadrante.getPtoBase().getX() + largura) / 2 ) + 1,
+                                            quadrante.getPtoBase().getY()
+                                        );
+                                        
+    cPonto q3    = cPonto(
+                                            ceil( (quadrante.getPtoBase().getX() + largura) / 2) + 1, 
+                                            ceil( (quadrante.getPtoBase().getY() + altura) / 2) + 1
+                                        );
 
-    //std::cout << "pBase quadrante = (" << quadrante.getPtoBase().getX() << "), (" << quadrante.getPtoBase().getY() << ")" << std::endl;
-    //std::cout << "pOposto quadrante = (" << quadrante.getPtoOposto().getX() << "), (" << quadrante.getPtoOposto().getY() << ")" << std::endl;
-    
-    largura = _largura / 2;
-    altura  = _largura / 2;
-
-    novoNo->setFilhoSuperiorEsquerdo( construirArvorePorRecursao(largura, altura, pBFSuperiorEsquerdo) );
-
-    std::cout << novoNo->getQuadrante().getPtoBase().getX() << ", ";
-    std::cout << novoNo->getQuadrante().getPtoBase().getY() << std::endl;
-
-    std::cout << novoNo->getQuadrante().getPtoOposto().getX() << ", ";
-    std::cout << novoNo->getQuadrante().getPtoOposto().getY() << std::endl;
-
-    novoNo->setFilhoSuperiorDireito( construirArvorePorRecursao(largura, altura, pBFSuperiorDireito) );
-
-    novoNo->setFilhoInferiorDireito( construirArvorePorRecursao(largura, altura, pBFInferiorDireito) );
-    novoNo->setFilhoInferiorEsquerdo( construirArvorePorRecursao(largura, altura, pBFInferiorEsquerdo) );
-    
-    // pBase.setXY(largura, altura);
+    novoNo->setFilhoSuperiorEsquerdo( construirArvorePorRecursao(floor(_largura / 2), _altura/2, q1, nivel + 1, 1) );
+    novoNo->setFilhoSuperiorDireito( construirArvorePorRecursao((_largura / 2), (_altura/2), q2, nivel + 1, 2) );
+    novoNo->setFilhoInferiorDireito( construirArvorePorRecursao((_largura / 2), (_altura/2), q3, nivel + 1, 3) );
+    novoNo->setFilhoInferiorEsquerdo( construirArvorePorRecursao((_largura / 2), (_altura/2), q4, nivel + 1, 4) );
 
     return novoNo;
-
 }
