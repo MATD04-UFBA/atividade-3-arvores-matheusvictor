@@ -3,8 +3,8 @@
 
 all:	compressao
 
-compressao:  compressao.o winGL.o cPonto.o cQuadrante.o cNo.o cQuadtree.o
-	g++ -o $@ $^ -L./external/SOIL/lib -lglut -lGL -lGLU -lsoil 2>&1 | cat
+compressao:  compressao.o winGL.o cPonto.o cQuadrante.o cNo.o cArvoreQuad.o
+	g++ -o $@ $^ -L./external/SOIL/lib -lglut -lGL -lGLU -lsoil
 
 clean:
 	rm *.o compressao

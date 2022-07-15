@@ -1,29 +1,48 @@
 #pragma once
 
+#include "cPonto.h"
 #include "cQuadrante.h"
 
 class cNo	{ 	
 
 private:
-	cQuadrante* quadrante;
+	cQuadrante quadrante;
 	
 	cNo* pai;
     cNo* noSuperiorEsquerdo;
     cNo* noSuperiorDireito;
-	cNo* noInferiorEsquerdo;
 	cNo* noInferiorDireito;
-
-	void setPai(cNo* pai); 
+	cNo* noInferiorEsquerdo;
 
 public:
+	cNo();
+	cNo(int largura, int altura, cPonto pBase);
 
-	cNo(cQuadrante* q);
+	void setQuadrante(cQuadrante q);
+	cQuadrante getQuadrante();
 
-	void addNosFilhos(cNo *n1, cNo *n2, cNo *n3, cNo *n4);
+	void 	setPai(cNo* pai); 
+	cNo* 	getPai();
 
-	cQuadrante*	getQuadrante();
+	void 	setFilhoSuperiorEsquerdo(cNo* no);
+	cNo* 	getFilhoSuperiorEsquerdo();
+
+	void 	setFilhoSuperiorDireito(cNo* no);
+	cNo* 	getFilhoSuperiorDireito();
+
+	void 	setFilhoInferiorDireito(cNo* no);
+	cNo* 	getFilhoInferiorDireito();
+
+	void 	setFilhoInferiorEsquerdo(cNo* no);
+	cNo* 	getFilhoInferiorEsquerdo();
+
+	void setQuadIntensidade(int i);
 
 	bool ehRaiz();
 	bool ehFolha();
+
+	void desenha();
+		
+	friend std::ostream &operator<<( std::ostream &output, const cNo &no);
 
 };

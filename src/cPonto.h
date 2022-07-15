@@ -17,5 +17,7 @@ public:
 	void 	setX(int x);
 	void 	setY(int y);
 	void 	setXY(int x, int y);
+	
+	friend std::ostream &operator<<( std::ostream &output, const cPonto &p);
 };
 						
