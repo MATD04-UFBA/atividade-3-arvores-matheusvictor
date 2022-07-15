@@ -70,7 +70,7 @@ int cQuadrante::calcularIntensidade(unsigned char* imagem, int largura, int altu
 	for(int i = 0; i < largura; i ++) {
 
 		for(int j = 0; j < altura; j ++) {
-			unsigned int intensidadePixel = imagem[i*largura+j];
+			unsigned int intensidadePixel = int(imagem[i*largura+j]);
 	 		intensidade += intensidadePixel;
 		}
 	}
