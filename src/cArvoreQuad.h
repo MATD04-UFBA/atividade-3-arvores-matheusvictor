@@ -1,5 +1,8 @@
 #pragma once
 
+#include "math.h"
+#include <stdlib.h>
+
 #include "cNo.h"
 #include "cPonto.h"
 #include "cQuadrante.h"
@@ -9,7 +12,7 @@ class cArvoreQuad {
 private:
 	cNo *raiz;	// representa a imagem
 
-	cNo* construirArvorePorRecursao(int largura, int altura, cPonto pBase);
+	cNo* construirArvorePorRecursao(int largura, int altura, cPonto pBase, int nivel, int numeroQuadrante);
 			
 public:
 
