@@ -1,5 +1,5 @@
 #pragma once
-
+#include <string> 
 #include "math.h"
 #include <stdlib.h>
 
@@ -11,7 +11,7 @@ class cArvoreQuad {
 
 private:
 	cNo *raiz;	// representa a imagem
-
+	
 	cNo* construirArvorePorRecursao(int largura, int altura, cPonto pBase, int nivel, int numeroQuadrante);
 			
 public:

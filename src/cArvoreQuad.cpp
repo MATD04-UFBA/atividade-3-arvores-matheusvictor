@@ -35,8 +35,11 @@ cNo* cArvoreQuad::construirArvorePorRecursao(int _largura, int _altura, cPonto p
     );
         
     cQuadrante quadrante = cQuadrante(pBase, pOposto, 0);
-    cNo *novoNo = new cNo(largura, altura, pBase);
 
+    std::cout << "Tamanho do quadrante => " << quadrante.getTamnhoQuadrante() << std::endl;
+	std::cout << "Intensidade media do quadrante => " << quadrante.calcularIntensidade(0, _largura, _altura) << std::endl;
+
+    cNo *novoNo = new cNo(largura, altura, pBase);
     if (novoNo == nullptr) return novoNo; // alocação de novoNo mau-sucedida
 
     if (quadrante.getPtoBase().getX() == quadrante.getPtoOposto().getX() &&
