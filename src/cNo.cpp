@@ -17,9 +17,10 @@ cNo::cNo() {
 	this->noInferiorDireito   = nullptr;
 }
 
-cNo::cNo(int altura, int largura, cPonto pBase) {
+// TODO, verificar como alterar isso tudo para apenas um quadrante como parametro
+cNo::cNo(int altura, int largura, cPonto pBase, unsigned char * imagem, int larguraImagem) {
 
-	this->quadrante = cQuadrante(pBase, cPonto(altura, largura), 0);
+	this->quadrante = cQuadrante(pBase, cPonto(altura, largura), imagem, larguraImagem);
 
 	this->pai 				  = nullptr;
 	this->noSuperiorEsquerdo  = nullptr;

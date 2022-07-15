@@ -45,38 +45,16 @@ void desenhaArvore() {
 	cPonto p1(iWidth/2, iHeight/2);
 	cPonto p2(iWidth, iHeight);
 	 
-	cQuadrante q0(p0, p1, 64);
-	cQuadrante q1(p2, p1, 222);
+	cQuadrante q0(p0, p1, image, iWidth);
+	cQuadrante q1(p2, p1, image, iWidth);
 
 	desenhaQuadrante(q0.getPtoBase(), q0.getPtoOposto(), q0.getIntensidade());
 	desenhaQuadrante(q1.getPtoBase(), q1.getPtoOposto(), q1.getIntensidade());
 }
 
 void montaArvore() {
-		
 	cPonto pontoBase = cPonto(0,0);
-	cArvoreQuad *arvore = new cArvoreQuad(iWidth, iHeight, pontoBase);
-
-	// //calcular intensidade média:	
-	// int intensidade = 0;
-	// for(int i = 0; i < iWidth; i ++) {
-	// 	for(int j = 0; j < iHeight; j ++) {
-	// 		unsigned int intensidadePixel = image[i*iWidth+j];
-	// 		intensidade += intensidadePixel;
-	// 	}
-	// }
-	
-	// int intensidadeMedia = intensidade/(iWidth*iHeight);
-	// std::cout << "Intensidade media => " << intensidadeMedia << std::endl;
-
-	// cQuadrante *quadrante = new cQuadrante(pontoBase, pontoOposto, intensidadeMedia);
-
-	// cNo *noRaiz = new cNo(quadrante);
-	// arvore->setRaiz(noRaiz);
-	// std::cout << "No raiz" << arvore->getRaiz() << endl;
-
-	// cNo* noAtual = arvore->getRaiz();
-	
+	cArvoreQuad *arvore = new cArvoreQuad(iWidth, iHeight, pontoBase, image);
 }
 
 

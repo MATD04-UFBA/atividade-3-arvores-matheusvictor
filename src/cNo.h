@@ -16,7 +16,7 @@ private:
 
 public:
 	cNo();
-	cNo(int largura, int altura, cPonto pBase);
+	cNo(int largura, int altura, cPonto pBase, unsigned char * imagem, int larguraImagem);
 
 	void setQuadrante(cQuadrante q);
 	cQuadrante getQuadrante();

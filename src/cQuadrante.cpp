@@ -18,14 +18,30 @@ cQuadrante::cQuadrante() {
 	erro 		= 0.0f;
 }
 
-cQuadrante::cQuadrante(cPonto p1, cPonto p2, int i){
+cQuadrante::cQuadrante(cPonto p1, cPonto p2, unsigned char* _imagem, int _larguraImagem){
 
 	pBase.setXY(p1.getX(), p1.getY());
 	altura 		= p2.getY() - p1.getY();
 	largura 	= p2.getX() - p1.getX();
 	nivel 		= 0;
-	intensidade = i;
 	erro 		= 0.0f;
+	imagem = _imagem;
+	larguraImagem = _larguraImagem;
+
+    //calcular intensidade média:        
+    intensidade = 0;
+    for(int i = p1.getX(); i < p2.getX(); i ++) {
+		for(int j = p1.getY(); j < p2.getY(); j ++) {
+			unsigned int intensidadePixel = imagem[i*larguraImagem + j]; // corrigir acesso ao pixel
+			intensidade += intensidadePixel;
+		}
+	}
+	if(altura < 1 || largura < 1) {
+		intensidade = intensidade/1;
+	} else {
+		intensidade = intensidade/(altura*largura);
+	}
+
 }
 
 void cQuadrante::setPtoBase(int p0, int p1) {

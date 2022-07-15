@@ -9,11 +9,13 @@ private:
 	int 	altura,largura;
 	int 	nivel;
 	int		intensidade;
+	unsigned char* imagem;
+	int larguraImagem;
 	float	erro;
 		
 public:
 	cQuadrante();
-	cQuadrante(cPonto p0, cPonto p1, int i);
+	cQuadrante(cPonto p0, cPonto p1, unsigned char* _imagem, int _larguraImagem);
 	
 	void 	setPtoBase(int p0, int p1);
 	cPonto 	getPtoBase();
