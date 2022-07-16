@@ -16,6 +16,7 @@ private:
 
 public:
 	cNo();
+	cNo(cQuadrante quadrante);
 	cNo(int largura, int altura, cPonto pBase);
 
 	void setQuadrante(cQuadrante q);

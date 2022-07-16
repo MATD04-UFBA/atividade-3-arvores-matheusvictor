@@ -9,6 +9,9 @@
 #include "cArvoreQuad.h"
 
 extern unsigned char* image;
+extern int 		iHeight, 
+				iWidth,
+				iChannels;
 
 cArvoreQuad::cArvoreQuad() {
     this->raiz = nullptr;
@@ -36,21 +39,24 @@ cNo* cArvoreQuad::construirArvorePorRecursao(int _largura, int _altura, cPonto p
         (pBase.getY() + altura)
     );
         
-    int filho = rand() % 4;
+    // int filho = rand() % 4;
+    // std::cout << "Filho => " << filho * 64 << std::endl; 
 
-    std::cout << filho * 64 << std::endl; 
+    cQuadrante quadrante = cQuadrante(pBase, pOposto, 0);
+    quadrante.setIntensidade(quadrante.calcularIntensidade(image, iWidth, altura));
 
-    cQuadrante quadrante = cQuadrante(pBase, pOposto, filho * 64);
+    std::cout << "=====================================================================" << std::endl;
 
- //    std::cout << "Tamanho do quadrante => " << quadrante.getTamnhoQuadrante() << std::endl;
-	// std::cout << "Intensidade media do quadrante => " << quadrante.calcularIntensidade(image, _largura, _altura) << std::endl;
+    std::cout << " - Largura do quadrante => " << quadrante.getLargura() << std::endl;
+    std::cout << " - Altura do quadrante => " << quadrante.getAltura() << std::endl;
+    std::cout << " - Tamanho do quadrante => " << quadrante.getTamanhoQuadrante() << std::endl;
 
-    cNo *novoNo = new cNo(largura, altura, pBase);
+    cNo *novoNo = new cNo(quadrante);
     if (novoNo == nullptr) return novoNo; // alocação de novoNo mau-sucedida
 
-    novoNo->setQuadIntensidade(filho * 64);
+    // novoNo->setQuadIntensidade(filho * 64);
 
-    std::cout << novoNo->getQuadrante().getIntensidade() << std::endl;
+    std::cout << "- Intensidade media do quadrante => " << novoNo->getQuadrante().getIntensidade() << std::endl;
 
     if (nivel == 2)
     // if (    quadrante.getPtoBase().getX() == quadrante.getPtoOposto().getX() &&
@@ -77,10 +83,13 @@ cNo* cArvoreQuad::construirArvorePorRecursao(int _largura, int _altura, cPonto p
                                             ceil( (quadrante.getPtoBase().getY() + altura) / 2) + 1
                                         );
 
-    novoNo->setFilhoSuperiorEsquerdo( construirArvorePorRecursao(floor(_largura / 2), _altura/2, q1, nivel + 1, 1) );
-    novoNo->setFilhoSuperiorDireito( construirArvorePorRecursao((_largura / 2), (_altura/2), q2, nivel + 1, 2) );
-    novoNo->setFilhoInferiorDireito( construirArvorePorRecursao((_largura / 2), (_altura/2), q3, nivel + 1, 3) );
-    novoNo->setFilhoInferiorEsquerdo( construirArvorePorRecursao((_largura / 2), (_altura/2), q4, nivel + 1, 4) );
+    largura = _largura / 2;
+    altura = _altura / 2;
+
+    novoNo->setFilhoSuperiorEsquerdo( construirArvorePorRecursao(largura, altura, q1, nivel + 1, 1) );
+    novoNo->setFilhoSuperiorDireito( construirArvorePorRecursao(largura, altura, q2, nivel + 1, 2) );
+    novoNo->setFilhoInferiorDireito( construirArvorePorRecursao(largura, altura, q3, nivel + 1, 3) );
+    novoNo->setFilhoInferiorEsquerdo( construirArvorePorRecursao(largura, altura, q4, nivel + 1, 4) );
 
     return novoNo;
 }

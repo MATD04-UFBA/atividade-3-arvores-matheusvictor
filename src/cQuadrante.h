@@ -1,6 +1,7 @@
 #pragma once
 
-#include <string> 
+#include <string>
+ 
 #include "cPonto.h"
 
 class cQuadrante { 	
@@ -31,7 +32,7 @@ public:
 	void 	setIntensidade(int intensidade);
 	int 	getIntensidade();
 
-	int 	getTamnhoQuadrante();
+	int 	getTamanhoQuadrante();
 
 	friend std::ostream &operator<<( std::ostream &output, const cQuadrante &q);
 

@@ -1,16 +1,25 @@
 #include <cstddef>
 #include <iostream>
 
-#include "cNo.h"
-#include "cPonto.h"
-#include "cQuadrante.h"
-
 #include "winGL.h"
+
+#include "cNo.h"
 
 
 cNo::cNo() {
 
 	this->quadrante = cQuadrante();
+
+	this->pai 				  = nullptr;
+	this->noSuperiorEsquerdo  = nullptr;
+    this->noSuperiorDireito   = nullptr;
+	this->noInferiorEsquerdo  = nullptr;
+	this->noInferiorDireito   = nullptr;
+}
+
+cNo::cNo(cQuadrante quadrante) {
+
+	this->quadrante = quadrante;
 
 	this->pai 				  = nullptr;
 	this->noSuperiorEsquerdo  = nullptr;

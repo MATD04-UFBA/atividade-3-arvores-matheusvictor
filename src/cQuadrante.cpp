@@ -52,7 +52,7 @@ void cQuadrante::setAltura(int a) {
 }
 
 int cQuadrante::getAltura() {
-	return this->altura;
+	return this->altura +1;
 }
 
 void cQuadrante::setLargura(int l) {
@@ -60,22 +60,35 @@ void cQuadrante::setLargura(int l) {
 }
 
 int cQuadrante::getLargura() {
-	return this->largura;
+	return this->largura +1;
 }
 
-int cQuadrante::calcularIntensidade(unsigned char* imagem, int largura, int altura) {
+int cQuadrante::calcularIntensidade(unsigned char* imagem, int larguraImagem, int altura) {
 
 	int intensidade = 0;
 
-	for(int i = 0; i < largura; i ++) {
+	/*
+	====== Testando acesso ao valor de intensidade de um pixel específico ========
 
-		for(int j = 0; j < altura; j ++) {
-			unsigned int intensidadePixel = int(imagem[i*largura+j]);
+	unsigned char 	aux = imagem[7*8+7]; 
+	std::cout << aux << std::endl;
+	std::cout << int(aux) << std::endl;
+	exit(1);
+
+	*/
+
+	for(int x = pBase.getX(); x < pBase.getX() + this->getLargura(); x++) {
+
+		for(int y = pBase.getY(); y < pBase.getY() + this->getAltura(); y++) {
+
+			unsigned int intensidadePixel = int(imagem[y*larguraImagem+x]);
+
+			std::cout << "intensidadePixel (" <<x <<","<<y<<") = " << intensidadePixel << std::endl;
 	 		intensidade += intensidadePixel;
 		}
 	}
 	
-	int intensidadeMedia = intensidade/(largura*altura);
+	int intensidadeMedia = intensidade/(this->getLargura()*this->getAltura());
 
 	return intensidadeMedia;
 }
@@ -88,8 +101,8 @@ int cQuadrante::getIntensidade() {
 	return this->intensidade;
 }
 
-int cQuadrante::getTamnhoQuadrante() {
-	return this->largura * this->altura;
+int cQuadrante::getTamanhoQuadrante() {
+	return this->getLargura() * this->getAltura();
 }
 
 
