@@ -143,7 +143,6 @@ De acordo com Zivian (2004, p. 158 _apud_ KNUTH, 1997), uma Árvore Binária (AB
 
 Assim, no caso de um AB, cada nó tem no máximo duas outras subárvores.
 
-
 ### **Quadtree (ou Árvore Quadrantes):**
 
 A definição acima aplica-se quase que inteiramente à uma Quadtree, com a diferença de que cada um dos seus nós têm quadro filhos, ao invés de apena dois como na AB.
@@ -165,6 +164,8 @@ Existem alguns tipos de Quadtree, tais como _Region Quadtree_, _Point QuadTree_,
 
 - [6], [7], [8], [9], [10]
 
+> Apesar de ter consultado os materiais acima, foi necessário realizar a instalação de uma distribuição Linux na máquina!
+
 ### Estruturas de dados, algoritmos & outros:
 
 - ZIVIANI, Nivio. Projeto de Algoritmos: com Implementações em Pascal e C. Vol. 2. Thomson, 2004, p. 158.
@@ -184,3 +185,31 @@ Existem alguns tipos de Quadtree, tais como _Region Quadtree_, _Point QuadTree_,
 - [Codificação de Huffman](https://www.youtube.com/watch?v=xQQt5myz00o)
 
 - [How to Fix Error Makefile: *** missing separator. Stop](https://www.youtube.com/watch?v=2nM6DBE0blA)
+
+-----
+
+## **Compilar & executar:**
+
+Com o compilador da sua preferência, será necessário compilar os seguintes arquivos `.cpp`: `winGL`, `cPonto`, `cNo`, `cQuadrante`, `cArvoreQuad` e `compressao`, que estão localizados no diretório `src`.
+
+Se estiver usando ambiente Linux, basta entrar na basta `src` e executar o comando `make` e assim a ferramenta `Makefile` irá executar o script de compilação.
+
+Usando o `g++`, por exemplo, você pode executar o seguinte comando para compilar esses arquivos:
+
+-----
+
+Após a compilação, digite o seguinte comando em seu terminal para que o programa seja executado:
+
+> ./compressao
+
+Lembrando que caso tenha dado outro nome ao executável ao invés de `main.exe`, deverá executar com o nome que foi dado.
+
+Caso você queira executar o programa já informando sob qual imagem que trabalhar basta que execute o comando a seguir:
+
+> ./compressao `images/NomeDaImagem.png`
+
+Onde `NomeDaImagem.png`, neste caso, representa o nome de uma das imagens que pode ser encontrada no diretório `src/images`. Do contrário, o imagem irá executar a `images/lena.png` por padrão.
+
+```
+Obs.: Pode haver diferenças dos comandos executados a depender do compilador e sistema operacional utilizados. Nesta documentação foram listados os comandos executados usando o Visual Studio Code na distribuição Linux Manjaro.
+```
